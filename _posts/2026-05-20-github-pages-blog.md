@@ -75,6 +75,43 @@ git push origin master
 
 几分钟后，博客就会自动更新！
 
+
+## 额外配置：SEO 与订阅
+
+### 站点地图 sitemap.xml
+
+创建 `sitemap.xml` 帮助搜索引擎收录：
+
+```xml
+---
+layout: null
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{{ '% for post in site.posts %' }}
+  <url>
+    <loc>{{ '{{ site.url }}{{ post.url }}' }}</loc>
+    <lastmod>{{ '{{ post.date | date_to_xmlschema }}' }}</lastmod>
+    <priority>0.8</priority>
+  </url>
+{{ '% endfor %' }}
+</urlset>
+```
+
+### robots.txt
+
+```
+User-agent: *
+Allow: /
+Sitemap: https://你的用户名.github.io/sitemap.xml
+```
+
+### RSS 订阅
+
+博客内置 RSS 功能，读者访问 `/feed.xml` 即可获取订阅源。用任意 RSS 阅读器添加这个链接，就能在新文章发布时自动收到通知。
+
+> 📡 本站 RSS：[https://theshycute.github.io/feed.xml](https://theshycute.github.io/feed.xml)
+
 ## 写在最后
 
 搭建博客只是开始，坚持写作才是关键。用博客记录学习历程，既是自我沉淀，也是一种分享。
