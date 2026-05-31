@@ -1,23 +1,40 @@
-Hey, I am TheShycute, a developer who loves coding and creating.
+Hey, I am TheShycute 👋, a developer passionate about coding and creating.
 
-This is my personal blog where I share thoughts on tech, projects, and daily life.
+### 🎯 About Me
 
-### About Me
+- 💻 Focused on **Java Backend** and **Deep Learning Computer Vision**
+- 🎓 Hands-on experience with YOLO, OpenCV, and CV technologies
+- 🌐 Familiar with Spring Boot, Vue.js full-stack development
+- 📚 Believer in continuous learning and practice
+- 🤖 Curious about AR/VR/MR frontier technologies
 
-- 💻 Passionate about programming and exploring new technologies
-- 📚 Believer in continuous learning
-- 🌱 Always growing
-- 🎯 Aiming to become a better developer
+### 🛠 Tech Stack
 
-### About This Blog
+| Category | Technologies |
+|----------|-------------|
+| Backend | Java · Spring Boot · MyBatis · FastAPI |
+| Frontend | Vue.js · React · TypeScript · HTML/CSS |
+| Deep Learning | YOLO · OpenCV · PyTorch · Instance Segmentation |
+| Database | MySQL · Redis |
+| Tools | Git · Docker · Linux · GitHub Actions |
 
-Built with [Hux Blog](https://github.com/Huxpro/huxpro.github.io) theme. Hosted on GitHub Pages. Check out [my repo](https://github.com/TheShycute/TheShycute.github.io).
+### 🏗 Projects
 
-### Contact
+- **Fuel Cell Defect Detection** — YOLO + React + FastAPI
+- **Metal Tube Inner Wall Defect Detection** — Multi-mode industrial inspection
+- **License Plate Recognition** — OpenCV + Python CV
+- **Sky Takeout System** — Spring Boot + Vue full-stack
+- [View All Projects →](/projects/)
 
-- GitHub: [TheShycute](https://github.com/TheShycute)
+### 📝 About This Blog
+
+Built with [Hux Blog](https://github.com/Huxpro/huxpro.github.io) theme. Hosted on GitHub Pages. I share tech learning, project experiences, and life thoughts here.
+
+### 📬 Contact
+
+- GitHub: [@TheShycute](https://github.com/TheShycute)
 - Email: 2906649414@qq.com
 
 ---
 
-> The best time to plant a tree was twenty years ago. The second best time is now.
+> "The best time to plant a tree was twenty years ago. The second best time is now."
