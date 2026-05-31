@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "车牌识别系统 License Plate Recognition"
+title: "基于 OpenCV 的车牌识别系统设计与实现"
 subtitle: "从图像处理到字符识别的完整实现"
-date: 2026-04-01 12:00:00
-author: "TheShycute"
+date: 2026-05-29 12:00:00
+author: "天使皮卡丘丨"
 header-img: "img/post-bg-os-metro.jpg"
 catalog: true
 tags:

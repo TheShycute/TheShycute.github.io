@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "从零搭建 GitHub Pages 个人博客"
+title: "GitHub Pages 个人博客搭建全攻略"
 subtitle: "基于 Hux Blog 主题的免费博客方案"
-date: 2026-05-31 12:00:00
-author: "TheShycute"
+date: 2026-05-20 12:00:00
+author: "天使皮卡丘丨"
 header-img: "img/home-bg-geek.jpg"
 catalog: true
 tags:
@@ -58,7 +58,7 @@ github_username: TheShycute
 ---
 layout: post
 title: "你的文章标题"
-date: 2026-05-31 12:00:00
+date: 2026-05-20 12:00:00
 tags:
   - 标签1
   - 标签2

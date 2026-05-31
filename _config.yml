@@ -1,10 +1,10 @@
 # Site settings
-title: TheShycute Blog
-SEOTitle: TheShycute 的博客 | ShyCute Blog
+title: 天使皮卡丘丨的博客
+SEOTitle: 天使皮卡丘丨的博客 | ShyCute Blog
 header-img: img/home-bg.jpg
 email: 2906649414@qq.com
-description: "这里是 TheShycute 的个人博客，记录学习与生活的点点滴滴"
-keyword: "TheShycute,博客,技术,编程"
+description: "这里是 天使皮卡丘丨 的个人博客，记录学习与生活的点点滴滴"
+keyword: "天使皮卡丘丨,博客,技术,编程"
 url: "https://theshycute.github.io"
 baseurl: ""
 
@@ -61,7 +61,7 @@ netease_comment: false
 
 # Sidebar settings
 sidebar: true
-sidebar-about-description: "代码与生活，皆不可辜负"
+sidebar-about-description: "代码与生活，皆不可辜负 | 天使皮卡丘丨"
 sidebar-avatar: https://github.com/TheShycute.png
 
 # Featured Tags

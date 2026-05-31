@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "项目记录：MR 混合现实探索"
+title: "混合现实（MR）技术探索记录"
 subtitle: "AR/VR 技术的学习与实践"
-date: 2026-04-09 12:00:00
-author: "TheShycute"
+date: 2026-05-22 12:00:00
+author: "天使皮卡丘丨"
 header-img: "img/post-bg-nextgen-web-pwa.jpg"
 catalog: true
 tags:

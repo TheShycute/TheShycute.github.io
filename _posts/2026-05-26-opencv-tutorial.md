@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Python + OpenCV 图像处理快速入门"
+title: "OpenCV 图像处理：从基础到工业实践"
 subtitle: "从零开始掌握计算机视觉基础"
-date: 2026-05-25 10:00:00
-author: "TheShycute"
+date: 2026-05-26 10:00:00
+author: "天使皮卡丘丨"
 header-img: "img/post-bg-css.jpg"
 catalog: true
 tags:

@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "作业集锦：编程学习中的练习题与笔记"
+title: "编程练习与算法学习笔记"
 subtitle: "从基础语法到算法题的积累"
-date: 2024-12-15 12:00:00
-author: "TheShycute"
+date: 2026-05-21 12:00:00
+author: "天使皮卡丘丨"
 header-img: "img/post-bg-css.jpg"
 catalog: true
 tags:

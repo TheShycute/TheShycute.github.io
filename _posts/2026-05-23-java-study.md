@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Java 学习笔记与核心知识点总结"
+title: "Java 核心知识点总结与学习笔记"
 subtitle: "从 Hello World 到框架实战的成长记录"
-date: 2024-11-30 12:00:00
-author: "TheShycute"
+date: 2026-05-23 12:00:00
+author: "天使皮卡丘丨"
 header-img: "img/post-bg-rwd.jpg"
 catalog: true
 tags:

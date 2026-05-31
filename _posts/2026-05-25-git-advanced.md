@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Git 高效工作流与进阶技巧"
+title: "Git 进阶指南：高效版本控制实践"
 subtitle: "从 add/commit/push 到真正驾驭版本控制"
-date: 2026-05-28 10:00:00
-author: "TheShycute"
+date: 2026-05-25 10:00:00
+author: "天使皮卡丘丨"
 header-img: "img/post-bg-digital-native.jpg"
 catalog: true
 tags:

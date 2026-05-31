@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "毕业设计：基于YOLO的燃料电池缺陷检测系统"
+title: "基于 YOLO 的燃料电池组件缺陷检测系统"
 subtitle: "深度学习 + 工业缺陷检测的完整实践"
-date: 2026-05-20 12:00:00
-author: "TheShycute"
+date: 2026-05-31 12:00:00
+author: "天使皮卡丘丨"
 header-img: "img/post-bg-dreamer.jpg"
 catalog: true
 tags:

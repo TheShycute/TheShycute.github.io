@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "黑马程序员学习之旅——从 Java 基础到微服务"
+title: "Java 全栈开发学习路线与实战总结"
 subtitle: "一套课程，走完 Java 全栈开发的学习路径"
-date: 2025-08-10 12:00:00
-author: "TheShycute"
+date: 2026-05-27 12:00:00
+author: "天使皮卡丘丨"
 header-img: "img/post-bg-web.jpg"
 catalog: true
 tags:

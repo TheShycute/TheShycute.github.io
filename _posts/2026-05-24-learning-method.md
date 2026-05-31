@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "程序员的自我修养：如何高效学习新技术"
+title: "技术学习方法论：从入门到持续成长"
 subtitle: "授人以鱼，不如授人以渔"
-date: 2026-05-30 10:00:00
-author: "TheShycute"
+date: 2026-05-24 10:00:00
+author: "天使皮卡丘丨"
 header-img: "img/post-bg-dreamer.jpg"
 catalog: true
 tags:

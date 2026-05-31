@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "苍穹外卖——前后端分离餐饮系统的全栈实践"
+title: "苍穹外卖：Spring Boot + Vue.js 全栈项目实战"
 subtitle: "Spring Boot + Vue.js 企业级项目从零到一"
-date: 2026-05-15 12:00:00
-author: "TheShycute"
+date: 2026-05-28 12:00:00
+author: "天使皮卡丘丨"
 header-img: "img/post-bg-alibaba.jpg"
 catalog: true
 tags:

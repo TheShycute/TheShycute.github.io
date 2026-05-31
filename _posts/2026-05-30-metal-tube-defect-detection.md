@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "金属细管内壁缺陷检测系统"
+title: "基于深度学习的金属细管内壁缺陷检测系统"
 subtitle: "YOLO 深度学习在工业质检中的多模式应用"
-date: 2026-05-18 12:00:00
-author: "TheShycute"
+date: 2026-05-30 12:00:00
+author: "天使皮卡丘丨"
 header-img: "img/post-bg-universe.jpg"
 catalog: true
 tags:
@@ -63,14 +63,14 @@ tags:
 用户选择多张图片（拖拽或选择文件夹）
     │
     ▼
-图片队列管理（进度条显示）
+图片队列管理（进度条实时显示）
     │
     ├─→ 图片 1 → 检测 → 保存结果
     ├─→ 图片 2 → 检测 → 保存结果
     └─→ 图片 N → 检测 → 保存结果
     │
     ▼
-汇总报告（缺陷统计、合格率）
+汇总报告（缺陷统计、合格率、耗时分析）
 并发处理：最多 4 张同时推理
 ```
 
@@ -79,134 +79,42 @@ tags:
 ### 🎥 模式三：摄像头实时检测
 
 ```
-摄像头视频流获取
-    │
-    ▼
-逐帧抽取（每 3 帧取 1 帧）
-    │
-    ▼
-模型推理
-    │
-    ▼
-实时标注叠加 → 屏幕展示
-    │
-    ▼
-缺陷帧自动保存
+摄像头视频流获取 → 逐帧抽取（每3帧取1帧）→ 模型推理
+                                        → 实时标注叠加展示
+                                        → 缺陷帧自动保存
 ```
 
-适用于在线检测场景，实时监控。
+适用于在线检测场景，实时监控产线质量。
 
 ### 📹 模式四：视频文件检测
 
 ```
-上传视频文件 → 逐帧抽取 → 批量推理 → 缺陷片段标注 → 报告
+上传视频文件 → 逐帧抽取 → 批量推理 → 缺陷片段标注 → 生成检测报告
 支持格式：MP4、AVI、MOV
 ```
 
-适用于离线分析、回溯检查。
+适用于离线分析、质量回溯。
 
-## 前端技术实现
+## 前端技术设计
 
-### React 组件设计
+### 组件架构
 
-```typescript
-// 检测模式选择器
-const DetectionMode = {
-  SINGLE: 'single',
-  BATCH: 'batch', 
-  CAMERA: 'camera',
-  VIDEO: 'video'
-};
+前端采用 React 18 + TypeScript + Webpack 5 构建，组件层次清晰：
 
-// 统一检测结果类型
-interface DetectionResult {
-  mode: DetectionMode;
-  defects: DefectItem[];
-  stats: {
-    total: number;
-    defective: number;
-    passRate: number;
-    avgConfidence: number;
-  };
-  timestamp: string;
-  processingTime: number;
-}
+- **顶层路由**：按检测模式分为四个主页面
+- **共享组件**：图像上传器、结果展示面板、进度指示器
+- **状态管理**：选用 Zustand 管理全局检测状态（当前模式、图片队列、检测结果、进度）
+- **样式方案**：Tailwind CSS 实现快速响应式布局
 
-interface DefectItem {
-  type: 'crack' | 'pit' | 'corrosion' | 'scratch';
-  severity: 'mild' | 'moderate' | 'severe';
-  location: string;
-  confidence: number;
-  boundingBox: [number, number, number, number];
-}
-```
+### 核心功能模块
 
-### 状态管理（Zustand）
-
-```typescript
-import { create } from 'zustand';
-
-const useDetectionStore = create((set, get) => ({
-  mode: 'single',
-  images: [],
-  results: [],
-  isProcessing: false,
-  progress: 0,
-  
-  setMode: (mode) => set({ mode }),
-  addImages: (files) => set((state) => ({ 
-    images: [...state.images, ...files] 
-  })),
-  
-  processImages: async () => {
-    set({ isProcessing: true, progress: 0 });
-    const { images } = get();
-    const results = [];
-    
-    for (let i = 0; i < images.length; i++) {
-      const result = await detectAPI(images[i]);
-      results.push(result);
-      set({ progress: ((i + 1) / images.length) * 100 });
-    }
-    
-    set({ results, isProcessing: false });
-  },
-}));
-```
-
-### Webpack 5 构建优化
-
-```javascript
-// webpack.config.js
-module.exports = {
-  mode: 'production',
-  optimization: {
-    splitChunks: {
-      chunks: 'all',
-      cacheGroups: {
-        vendor: {
-          test: /[\\/]node_modules[\\/]/,
-          name: 'vendors',
-          chunks: 'all',
-        },
-      },
-    },
-  },
-  module: {
-    rules: [
-      {
-        test: /\.tsx?$/,
-        use: 'ts-loader',
-        exclude: /node_modules/,
-      },
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader', 'postcss-loader'],
-      },
-    ],
-  },
-};
-```
+| 模块 | 功能 | 技术要点 |
+|------|------|---------|
+| 图像上传 | 支持拖拽、粘贴、文件选择 | HTML5 Drag & Drop API |
+| 检测进度 | 实时显示批量处理进度 | WebSocket / 轮询 |
+| 结果展示 | 缺陷框标注 + 分类标签 | Canvas 叠加绘制 |
+| 报告导出 | PDF/Excel 格式 | 前端生成 + 下载 |
+| 摄像头 | 浏览器调用本地摄像头 | MediaDevices API |
 
 ## YOLO 模型训练细节
 
@@ -222,9 +130,9 @@ module.exports = {
 ### 训练策略
 
 - **两阶段训练**：先在公开数据集预训练，再用自制数据集微调
-- **数据增强**：随机裁剪、旋转 (±15°)、亮度/对比度调整、高斯噪声
+- **数据增强**：随机裁剪、旋转 (±15°)、亮度/对比度调整、高斯噪声注入
 - **损失函数**：CIoU Loss + CrossEntropy Loss
-- **学习率调度**：Cosine Annealing with Warmup
+- **学习率调度**：Cosine Annealing with Warmup（前 3 个 epoch 线性预热）
 
 ### 模型性能
 
@@ -237,11 +145,21 @@ module.exports = {
 | 推理速度 (GPU) | 15ms/帧 |
 | 推理速度 (CPU) | 85ms/帧 |
 
+## 技术挑战与解决方案
+
+| 挑战 | 解决方案 |
+|------|---------|
+| 内壁光线不足 | 自适应直方图均衡化 + 多尺度 Retinex 增强 |
+| 小缺陷检测困难 | 增加高分辨率输入 + FPN 特征金字塔 |
+| 批量处理效率 | 线程池并发控制 + GPU 批推理 |
+| 实时视频流畅度 | 跳帧策略 + 模型量化（FP16 → INT8） |
+| 缺陷严重程度评估 | 基于面积和深度的分级算法 |
+
 ## 项目收获
 
-1. **多场景适配**：同一模型服务四种检测模式，考验架构设计能力
-2. **性能优化**：批量推理的并发控制、摄像头模式的帧率平衡
-3. **工程化深度**：Webpack 5 精细化构建配置、TypeScript 严格模式
-4. **工业思维**：从精度、速度、稳定性三个维度综合评估系统
+1. **多场景适配**：同一套模型和架构服务四种检测模式，锻炼了架构设计能力
+2. **性能优化意识**：从批量推理的并发控制到摄像头模式的帧率平衡
+3. **工程化深度**：Webpack 精细化配置、TypeScript 严格模式、组件化开发
+4. **工业思维**：从精度、速度、稳定性三个维度综合评估系统表现
 
 > 项目仓库：[Gitee - gwf-bs](https://gitee.com/TheShycute/gwf-bs)（私有）
