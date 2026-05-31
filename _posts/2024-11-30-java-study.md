@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Java 学习笔记与代码仓库"
-subtitle: "从 Hello World 到框架实战"
+title: "Java 学习笔记与核心知识点总结"
+subtitle: "从 Hello World 到框架实战的成长记录"
 date: 2024-11-30 12:00:00
 author: "TheShycute"
 header-img: "img/post-bg-rwd.jpg"
@@ -13,56 +13,280 @@ tags:
   - 基础
 ---
 
-## 项目概述
+## 我的 Java 学习之路
 
-这是我在学习 Java 编程过程中的代码仓库，记录了从零开始学习 Java 的完整历程。
+```
+Hello World (Day 1)
+    │
+    ▼
+基本语法 + 流程控制 (Week 1-2)
+    │
+    ▼
+面向对象 (Week 3-4)
+    │
+    ▼
+集合 + IO + 异常 (Week 5-6)
+    │
+    ▼
+多线程 + 网络编程 (Week 7-8)
+    │
+    ▼
+JDBC + 数据库 (Week 9-10)
+    │
+    ▼
+Spring Boot 入门 (Week 11+)
+```
 
-## 学习路径
+## 面向对象核心
 
-### 第一阶段：Java 基础
+### 封装
+
 ```java
-public class HelloWorld {
-    public static void main(String[] args) {
-        System.out.println("Hello, Java!");
+public class BankAccount {
+    private double balance;  // 私有，外部不可直接访问
+    
+    // 提供受控的访问方式
+    public double getBalance() {
+        return balance;
+    }
+    
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+        } else {
+            throw new IllegalArgumentException("金额必须为正数");
+        }
+    }
+    
+    public void withdraw(double amount) {
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+        } else {
+            throw new IllegalArgumentException("余额不足");
+        }
     }
 }
 ```
 
-- 基本语法：变量、运算符、流程控制
-- 面向对象：类、对象、继承、多态、接口
-- 异常处理：try-catch-finally
-- 集合框架：ArrayList、HashMap、HashSet
+### 继承
 
-### 第二阶段：进阶特性
-- 泛型
-- 注解与反射
-- Lambda 表达式与 Stream API
-- 多线程与并发编程（synchronized、Lock、线程池）
+```java
+// 父类
+class Employee {
+    protected String name;
+    protected double salary;
+    
+    public double getAnnualSalary() {
+        return salary * 12;
+    }
+}
 
-### 第三阶段：实用技能
-- JDBC 数据库操作
-- 文件 IO 与网络编程
-- Maven 项目构建
-- JUnit 单元测试
+// 子类
+class Manager extends Employee {
+    private double bonus;
+    
+    @Override
+    public double getAnnualSalary() {
+        return super.getAnnualSalary() + bonus;  // 重写 + 复用
+    }
+}
+```
 
-## 重点笔记
+### 多态
 
-### 面向对象三大特性
+```java
+// 接口定义行为规范
+interface Payable {
+    double calculatePay();
+}
 
-| 特性 | 说明 |
-|------|------|
-| 封装 | 隐藏内部实现，对外提供接口 |
-| 继承 | 子类复用父类的属性和方法 |
-| 多态 | 同一方法调用，不同对象有不同行为 |
+class FullTimeEmployee implements Payable {
+    public double calculatePay() {
+        return salary / 12;
+    }
+}
+
+class Contractor implements Payable {
+    public double calculatePay() {
+        return hourlyRate * hoursWorked;
+    }
+}
+
+// 多态应用：统一处理不同类型
+public void processPayroll(List<Payable> workers) {
+    for (Payable p : workers) {
+        System.out.println(p.calculatePay());  // 无需关心具体类型
+    }
+}
+```
+
+## 集合框架深度
+
+### 选型指南
+
+```
+需要快速查找？
+    YES → HashMap / HashSet (O(1))
+    NO  → 需要有序？
+            YES → 需要排序？
+                    YES → TreeMap / TreeSet (O(log n))
+                    NO  → LinkedHashMap (插入顺序)
+            NO  → 需要线程安全？
+                    YES → ConcurrentHashMap
+                    NO  → ArrayList / LinkedList
+```
+
+### HashMap 原理
+
+```java
+// JDK 8+ 中 HashMap 解决冲突的方式：
+// 1. 链表长度 < 8：链表
+// 2. 链表长度 >= 8：转为红黑树（提升查询效率）
+
+// 扩容机制：默认负载因子 0.75
+// 当 size > capacity * 0.75 时，扩容为原来的 2 倍
+
+Map<String, Integer> map = new HashMap<>(16);  // 初始容量 16
+map.put("key", 1);
+
+// 底层结构：
+// [0] -> (key, value) -> (key, value)  // 链表
+// [1] -> 红黑树节点                       // 树化
+// [2] -> null
+// ...
+```
+
+## 多线程与并发
+
+### 线程创建
+
+```java
+// 方式1：继承 Thread
+class MyThread extends Thread {
+    public void run() {
+        System.out.println("Thread running");
+    }
+}
+
+// 方式2：实现 Runnable（推荐）
+class MyRunnable implements Runnable {
+    public void run() {
+        System.out.println("Runnable running");
+    }
+}
+
+// 方式3：线程池（实际项目首选）
+ExecutorService executor = Executors.newFixedThreadPool(10);
+executor.submit(() -> {
+    System.out.println("Task running in thread pool");
+});
+executor.shutdown();
+```
+
+### synchronized vs Lock
+
+```java
+// synchronized：JVM 内置，自动加锁/释放
+public synchronized void method1() {
+    // 临界区
+}
+
+// Lock：更灵活，可中断、可超时、可条件等待
+private final ReentrantLock lock = new ReentrantLock();
+
+public void method2() {
+    lock.lock();
+    try {
+        // 临界区
+    } finally {
+        lock.unlock();  // 必须在 finally 中释放
+    }
+}
+```
 
 ### 常用设计模式
 
-- **单例模式**：确保类只有一个实例
-- **工厂模式**：将对象创建逻辑封装
-- **观察者模式**：一对多的依赖关系
+| 模式 | 用途 | Java 示例 |
+|------|------|-----------|
+| **单例** | 全局唯一实例 | `Runtime.getRuntime()` |
+| **工厂** | 创建对象解耦 | `Calendar.getInstance()` |
+| **观察者** | 一对多通知 | `PropertyChangeListener` |
+| **代理** | 访问控制 | Spring AOP |
+| **策略** | 算法族可切换 | `Comparator` 接口 |
+
+```java
+// 单例模式（双重检查锁定）
+public class Singleton {
+    private static volatile Singleton instance;
+    
+    private Singleton() {}
+    
+    public static Singleton getInstance() {
+        if (instance == null) {
+            synchronized (Singleton.class) {
+                if (instance == null) {
+                    instance = new Singleton();
+                }
+            }
+        }
+        return instance;
+    }
+}
+
+// 工厂模式
+interface Animal { void speak(); }
+class Dog implements Animal { public void speak() { System.out.println("汪汪"); } }
+class Cat implements Animal { public void speak() { System.out.println("喵喵"); } }
+
+class AnimalFactory {
+    public static Animal create(String type) {
+        return switch (type) {
+            case "dog" -> new Dog();
+            case "cat" -> new Cat();
+            default -> throw new IllegalArgumentException("未知类型");
+        };
+    }
+}
+```
+
+## JVM 基础知识
+
+```java
+// JVM 内存模型
+┌─────────────────────────────┐
+│         方法区（元空间）        │  类信息、常量、静态变量
+├─────────────────────────────┤
+│            堆                 │  对象实例、数组
+│  ┌──────────┬──────────┐    │
+│  │  年轻代   │  老年代   │    │
+│  │ Eden/S0/S1│         │    │
+│  └──────────┴──────────┘    │
+├─────────────────────────────┤
+│            栈                 │  局部变量、方法调用
+├─────────────────────────────┤
+│        本地方法栈             │  Native 方法
+├─────────────────────────────┤
+│        程序计数器             │  当前执行位置
+└─────────────────────────────┘
+```
+
+### GC 基础知识
+
+- **Minor GC**：清理年轻代，频繁但快速
+- **Major GC / Full GC**：清理整个堆，慢但彻底
+- Java 8 默认使用 Parallel GC，Java 9+ 默认 G1 GC
+
+## 学习资源推荐
+
+| 级别 | 资源 |
+|------|------|
+| 入门 | 《Head First Java》、廖雪峰 Java 教程 |
+| 进阶 | 《Effective Java》、《Java 并发编程实战》 |
+| 深入 | 《深入理解 Java 虚拟机》（周志明） |
+| 实战 | 黑马程序员课程、尚硅谷课程 |
 
 ## 总结
 
-Java 作为企业级开发的主流语言，生态丰富、社区活跃。打好 Java 基础，是通往 Spring Boot 全家桶和后端开发的必经之路。
+Java 是一门值得深耕的语言——生态庞大、岗位众多、社区活跃。打好基础（语法、集合、多线程、JVM），再去学 Spring 全家桶，会事半功倍。
 
-> 项目仓库：[Gitee - javastudy](https://gitee.com/TheShycute/javastudy)（私有）
+> 📂 项目仓库：[Gitee - javastudy](https://gitee.com/TheShycute/javastudy)（私有）
