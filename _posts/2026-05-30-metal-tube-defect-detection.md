@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "基于深度学习的金属细管内壁缺陷检测系统 - 全栈实战"
-subtitle: "YOLOv8 + FastAPI + React 18 + TypeScript 工业缺陷检测全栈方案"
+title: "基于YOLO26的金属细管内壁缺陷检测系统 - 全栈实战"
+subtitle: "YOLO26 + FastAPI + React 18 + TypeScript 工业缺陷检测全栈方案"
 date: 2026-05-30 12:00:00
 author: "天使皮卡丘丨"
 header-img: "img/post-bg-universe.jpg"
@@ -9,7 +9,7 @@ catalog: true
 tags:
   - 项目
   - 深度学习
-  - YOLO
+  - YOLO26
   - 工业检测
   - FastAPI
   - React
@@ -31,7 +31,7 @@ tags:
 | UI 组件 | Lucide React + Framer Motion 动画 |
 | 图表库 | Recharts |
 | 后端框架 | Python FastAPI |
-| AI 推理 | YOLOv8 (ultralytics) + PyTorch + TensorFlow + ONNX |
+| AI 推理 | YOLO26 (ultralytics) + PyTorch + TensorFlow + ONNX |
 | 图像处理 | OpenCV |
 | 数据库 | MySQL（支持 Supabase 云数据库切换） |
 | 认证授权 | JWT（admin / operator / viewer 三级角色） |
