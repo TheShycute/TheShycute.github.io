@@ -218,4 +218,4 @@ cp nginx.conf /etc/nginx/sites-available/
 4. **性能优化**：从批量推理并发控制到摄像头模式跳帧策略，在精度和速度间找到平衡
 5. **工业思维**：三级权限管理、双数据库后端、系统设置热更新，面向真实工业场景设计
 
-> 项目仓库：[Gitee - gwfBS/f5](https://gitee.com/TheShycute/gwfBS)
+> 项目仓库：[Gitee - gwfBS](https://gitee.com/TheShycute/gwf-bs)
